@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Dan · 个人名片 ｜ AI 全栈开发者 · 企业 AI 落地顾问 (CFA)</title>
+<meta name="description" content="Dan (Well Dan) - CFA 背景的 AI 全栈开发者与企业 AI 落地顾问。把想法做成真东西：从商业痛点到真机上线。" />
+<style>
+  :root{
+    --page: oklch(0.957 0.008 343);
+    --ticket: oklch(1 0 0);
+    --ink: oklch(0.24 0.035 345);
+    --muted: oklch(0.47 0.03 345);
+    --line: oklch(0.84 0.018 343);
+    --dash: oklch(0.72 0.03 343);
+    --rose: oklch(0.58 0.19 343);
+    --rose-deep: oklch(0.5 0.175 343);
+    --rose-wash: oklch(0.95 0.04 343);
+    --rose-ink: oklch(0.47 0.15 343);
+    --teal: oklch(0.48 0.11 195);
+    --teal-wash: oklch(0.94 0.04 195);
+    --amber-wash: oklch(0.95 0.045 85);
+    --wechat: oklch(0.65 0.18 155);
+    --field: oklch(0.97 0.008 343);
+    --shadow: oklch(0.24 0.035 345 / 0.14);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --z-bar: 50;
+    --z-toast: 70;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; }
+  body{
+    background: var(--page); color: var(--ink);
+    font-family: var(--font-sans); font-size:15px; line-height:1.6;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:0 0 92px 0;
+  }
+  h1,h2,h3{ text-wrap: balance; letter-spacing:-0.01em; }
+  p{ text-wrap: pretty; }
+  :focus-visible{ outline:2px solid var(--rose); outline-offset:2px; border-radius:6px; }
+
+  .strap{ width:100%; display:flex; justify-content:center; padding:14px 0 0; }
+  .strap svg{ display:block; }
+  .page{ width:100%; max-width:600px; padding:0 16px; display:flex; flex-direction:column; gap:16px; }
+
+  .ticket{
+    position:relative; background:var(--ticket);
+    border:1.5px solid var(--ink); border-radius:14px;
+    box-shadow: 0 12px 22px -16px var(--shadow);
+  }
+  .ticket .notch{ position:absolute; top:var(--cut, 50%); width:22px; height:22px; border-radius:50%; background:var(--page); border:1.5px solid var(--ink); }
+  .notch.left{ left:-13px; clip-path: inset(0 0 0 50%); border-left:none; }
+  .notch.right{ right:-13px; clip-path: inset(0 50% 0 0); border-right:none; }
+  .perf{ border-top:2px dashed var(--dash); margin:0 14px; }
+
+  /* Badge */
+  .badge{ --cut: 100%; padding-bottom:6px; }
+  .hole{ display:flex; justify-content:center; padding:10px 0 2px; }
+  .hole span{ width:92px; height:16px; border:1.5px solid var(--ink); border-radius:999px; background:var(--page); }
+  .badge-name h1{ font-size:44px; font-weight:900; text-align:center; }
+  .badge-band{ margin:8px 18px 0; background:var(--rose); color:oklch(1 0 0); font-size:13px; font-weight:800; text-align:center; border-radius:8px; padding:6px 10px; }
+  .badge-sub{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; padding:10px 18px 2px; }
+  .chip{ font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; border:1.5px solid var(--ink); }
+  .chip.amber{ background:var(--amber-wash); }
+  .chip.teal{ background:var(--teal-wash); }
+  .chip.rose{ background:var(--rose-wash); }
+  .badge-slogan{ text-align:center; font-size:13.5px; font-weight:700; padding:6px 22px 12px; }
+  .badge-slogan small{ display:block; font-weight:400; color:var(--muted); font-size:12px; margin-top:2px; }
+
+  /* Tappable stub rows */
+  .stub-btn{
+    display:flex; align-items:center; gap:12px; width:100%;
+    background:none; border:none; font:inherit; color:inherit; text-align:left;
+    padding:14px 16px; cursor:pointer; border-radius:14px;
+  }
+  .stub-btn:active{ background:var(--field); }
+  .stub-code{ font-family:var(--font-mono); font-size:11px; font-weight:700; color:oklch(1 0 0); background:var(--ink); border-radius:6px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+  .stub-code.rose{ background:var(--rose); }
+  .stub-code.teal{ background:var(--teal); }
+  .stub-code.green{ background:var(--wechat); }
+  .stub-main{ flex:1; min-width:0; }
+  .stub-main strong{ display:block; font-size:16px; }
+  .stub-main span{ display:block; font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chev{ flex-shrink:0; color:var(--rose); display:flex; }
+  .barcode{ flex-shrink:0; width:34px; height:44px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 13px); }
+  .mini-get{
+    flex-shrink:0; background:var(--ink); color:oklch(1 0 0);
+    font-size:13px; font-weight:800; border-radius:999px; padding:7px 16px; text-decoration:none;
+    border:1.5px solid var(--ink);
+  }
+  .mini-get:active{ filter:brightness(1.6); }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--wechat); flex-shrink:0; }
+  .stub-hint{ display:flex; align-items:center; gap:6px; padding:0 16px 12px 16px; font-family:var(--font-mono); font-size:11.5px; color:var(--muted); }
+
+  /* Duo */
+  .duo{ display:grid; grid-template-columns:1fr 1fr; }
+  .duo > button:first-child{ border-right:2px dashed var(--dash); }
+  .duo > button{
+    background:none; border:none; font:inherit; color:inherit; text-align:left;
+    padding:12px 14px; cursor:pointer; display:flex; flex-direction:column; gap:2px;
+  }
+  .duo > button:active{ background:var(--field); }
+  .duo .kind{ font-size:11px; font-weight:800; color:var(--teal); }
+  .duo strong{ font-size:14.5px; }
+  .duo span{ font-size:12px; color:var(--muted); }
+  .duo .go{ font-size:12px; font-weight:800; color:var(--rose-ink); margin-top:4px; }
+
+  /* Slim static stubs */
+  .slim{ padding:12px 16px 14px; }
+  .slim h2{ font-size:15px; display:flex; align-items:center; gap:8px; }
+  .slim ul{ list-style:none; margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+  .slim li{ font-size:13px; background:var(--field); border:1px solid var(--line); border-radius:9px; padding:7px 10px; }
+  .cloud{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .cloud span{ font-size:12px; font-weight:700; border:1.5px solid var(--ink); border-radius:999px; padding:2px 10px; }
+
+  /* QR ticket */
+  .qr-grid{ display:grid; grid-template-columns:128px 1fr; gap:14px; padding:12px 16px 14px; align-items:start; }
+  .qr-grid figure{ border:1.5px solid var(--ink); border-radius:10px; overflow:hidden; }
+  .qr-grid figure img{ width:100%; height:128px; object-fit:cover; display:block; }
+  .qr-grid figcaption{ font-size:11px; color:var(--muted); text-align:center; padding:3px 0 5px; border-top:1px solid var(--line); }
+  .btn{
+    appearance:none; border-radius:999px; font-family:inherit; font-size:13.5px; font-weight:800;
+    padding:9px 18px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+  }
+  .btn.copy{ background:var(--ink); border:1.5px solid var(--ink); color:oklch(1 0 0); }
+  .btn.copy:active{ filter:brightness(1.6); }
+  .btn.get{ background:var(--ink); border:1.5px solid var(--ink); color:oklch(1 0 0); }
+  .btn.get:active{ filter:brightness(1.6); }
+  .btn.ghost{ background:var(--ticket); border:1.5px solid var(--ink); color:var(--ink); }
+  .contact{ display:flex; flex-direction:column; margin-top:8px; }
+  .contact a,.contact button{
+    display:flex; align-items:center; gap:8px; padding:8px 0; background:none; border:none;
+    border-top:1px solid var(--line); font:inherit; color:inherit; text-align:left; text-decoration:none; cursor:pointer; width:100%;
+  }
+  .contact strong{ font-size:13.5px; flex:1; }
+  .contact code{ font-family:var(--font-mono); font-size:12px; color:var(--muted); }
+  .contact .go{ font-size:12px; font-weight:800; color:var(--rose-ink); }
+
+  /* Project dialog */
+  dialog.dlg{
+    margin:auto; border:1.5px solid var(--ink); border-radius:16px; padding:0;
+    width:min(92vw, 520px); max-height:calc(100vh - 48px); background:var(--ticket); color:var(--ink);
+    box-shadow: 0 24px 48px -20px var(--shadow);
+  }
+  dialog.dlg::backdrop{ background: oklch(0.24 0.035 345 / 0.5); }
+  .dlg-head{ display:flex; align-items:center; gap:10px; padding:14px 16px 10px; border-bottom:2px dashed var(--dash); }
+  .dlg-head h3{ font-size:17px; flex:1; }
+  .dlg-close{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--ink);
+    background:var(--ticket); color:var(--ink); font-size:15px; font-weight:800; cursor:pointer; flex-shrink:0;
+  }
+  .dlg-close:active{ background:var(--field); }
+  .dlg-body{ padding:12px 16px 18px; max-height:70vh; overflow:auto; }
+  .dlg-body > p{ font-size:13.5px; }
+  .dlg-body figure{ margin-top:10px; border:1.5px solid var(--ink); border-radius:10px; overflow:hidden; }
+  .dlg-body figure img{ width:100%; height:auto; display:block; max-height:300px; object-fit:cover; object-position:top; cursor:zoom-in; }
+  .dlg-body figure img.full{ max-height:none; cursor:zoom-out; }
+  .dlg-body figcaption{ font-size:11.5px; color:var(--muted); padding:5px 10px 7px; border-top:1px solid var(--line); }
+  .dlg-facts{ width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
+  .dlg-facts th,.dlg-facts td{ text-align:left; padding:7px 0; border-top:1px solid var(--line); vertical-align:top; }
+  .dlg-facts tr:first-child th,.dlg-facts tr:first-child td{ border-top:none; }
+  .dlg-facts th{ width:78px; font-weight:800; }
+  .dlg-facts td small{ display:block; color:var(--muted); font-size:12px; }
+  .dlg-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .dlg-tags span{ font-size:11.5px; font-weight:600; color:var(--muted); background:var(--field); border:1px solid var(--line); padding:2px 8px; border-radius:999px; }
+  .dlg-cta{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+
+  .bottom-bar{ position:fixed; left:0; right:0; bottom:0; z-index:var(--z-bar); background:oklch(1 0 0 / 0.96); border-top:1.5px solid var(--ink); }
+  .bottom-inner{ max-width:600px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:10px; }
+  .bottom-inner img{ width:34px; height:34px; border-radius:9px; object-fit:cover; border:1.5px solid var(--ink); }
+  .bottom-inner div{ flex:1; min-width:0; }
+  .bottom-inner strong{ font-size:13px; display:block; }
+  .bottom-inner span{ font-size:11.5px; color:var(--muted); display:block; }
+  .bottom-inner button{ background:var(--ink); color:oklch(1 0 0); border:1.5px solid var(--ink); border-radius:999px; font:inherit; font-size:13px; font-weight:800; padding:9px 16px; cursor:pointer; display:flex; align-items:center; gap:7px; }
+  .bottom-inner button:active{ filter:brightness(1.6); }
+
+  .toast{
+    position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(12px); z-index:var(--z-toast);
+    background:var(--ink); color:oklch(1 0 0); font-size:13px; font-weight:600;
+    padding:11px 18px; border-radius:999px; box-shadow:0 14px 26px -14px var(--shadow);
+    opacity:0; pointer-events:none; max-width:92vw; text-align:center;
+    transition: opacity 280ms cubic-bezier(0.22,1,0.36,1), transform 280ms cubic-bezier(0.22,1,0.36,1);
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:430px){
+    .duo{ grid-template-columns:1fr; }
+    .duo > button:first-child{ border-right:none; border-bottom:2px dashed var(--dash); }
+    .qr-grid{ grid-template-columns:1fr; }
+    .qr-grid figure img{ height:170px; }
+    .badge-name h1{ font-size:38px; }
+    .stub-main span{ white-space:normal; }
+    dialog.dlg{ width:calc(100vw - 28px); border-radius:14px; }
+    .dlg-head{ padding:10px 12px 8px; }
+    .dlg-head h3{ font-size:15.5px; }
+    .dlg-body{ padding:10px 12px 14px; max-height:calc(100vh - 160px); }
+  }
+  @media (prefers-reduced-motion: reduce){ .toast{ transition:none; } }
+</style>
+</head>
+<body>
+<!-- THESIS: 首屏即票根列表，一眼即证件，截图全部收进原生弹窗，拒绝长页堆砌。OWN-WORLD: 纸白票根加墨黑硬边加侧面齿孔，酒红证件条加条码加虚线撕口，原生 dialog 做证据弹窗。STORY: 访客十秒扫完证件头与四联票根，点任意票根看截图证据，最后在二维码联加微信。FIRST VIEWPORT: 挂绳孔加 DAN 大字加酒红会议条，往下三联票根标题全部可见。FORM: 票根世界方向 C，用户选定，原型 .impeccable/mocks/dirC-lanyard-pass.png，加用户指定的项目弹窗。FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+<div class="strap" aria-hidden="true">
+  <svg width="120" height="46" viewBox="0 0 120 46" fill="none">
+    <path d="M42 0 L56 40 M78 0 L64 40" stroke="oklch(0.72 0.02 343)" stroke-width="9" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div class="page">
+
+  <header class="ticket badge">
+    <div class="hole" aria-hidden="true"><span></span></div>
+    <div class="badge-name"><h1>DAN</h1></div>
+    <div class="badge-band">Developer Conference · FDE PRO S26 北京站</div>
+    <div class="badge-sub">
+      <span class="chip amber">CFA 特许金融分析师</span>
+      <span class="chip teal">企业 AI 落地 (FDE)</span>
+      <span class="chip rose">AI 全栈 · 独立开发者</span>
+    </div>
+    <p class="badge-slogan">把想法做成真东西：从商业痛点到真机上线
+      <small>Well-Dan · 需求 → Demo → 核实 → 上线</small>
+    </p>
+  </header>
+
+  <article class="ticket">
+    <button class="stub-btn" type="button" onclick="openProj('b2b')">
+      <span class="barcode" aria-hidden="true"></span>
+      <span class="stub-main"><strong>销售与合同 ERP 闭环系统</strong><span>传统制造企业 · 钉钉＋ERP · 点看截图</span></span>
+      <span class="stub-code">B2B</span>
+      <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+    </button>
+  </article>
+
+  <article class="ticket">
+    <button class="stub-btn" type="button" onclick="openProj('app')">
+      <span class="stub-main"><strong>今天岛上吃什么？</strong><span>iOS 应用 · App Store 在架 · 点看截图</span></span>
+      <a class="mini-get" href="https://apps.apple.com/cn/app/%E4%BB%8A%E5%A4%A9%E5%B2%9B%E4%B8%8A%E5%90%83%E4%BB%80%E4%B9%88/id6757694950" target="_blank" rel="noopener" onclick="event.stopPropagation()">GET</a>
+      <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+    </button>
+  </article>
+
+  <article class="ticket">
+    <div class="duo">
+      <button type="button" onclick="openProj('health')">
+        <span class="kind">本地优先 · 隐私安全</span>
+        <strong>全家健康档案</strong>
+        <span>体检报告 AI 结构化</span>
+        <span class="go">看截图 ›</span>
+      </button>
+      <button type="button" onclick="openProj('rebuy')">
+        <span class="kind">微信小程序 · 自建后端</span>
+        <strong>复购不烦恼</strong>
+        <span>历史分位比价引擎</span>
+        <span class="go">看截图 ›</span>
+      </button>
+    </div>
+  </article>
+
+  <article class="ticket">
+    <div class="slim">
+      <h2><span class="stub-code teal">R&amp;D</span>Agent 研发与课程</h2>
+      <ul>
+        <li><strong>AI 领域投资与 Agent 实操课</strong>（与 CFA 合伙人联合）：技术演进、投资逻辑到生产级 Agent 全链路</li>
+        <li><strong>在研矩阵</strong>：深度调研 · 投资分析 · 数字人 · 企业知识库 · 个人工作台</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="ticket">
+    <div class="slim">
+      <h2><span class="stub-code">TALK</span>见面可以聊</h2>
+      <ul>
+        <li>企业 AI 落地：传统企业怎样轻量打通 ERP</li>
+        <li>Agent 实战：金融与调研类工作流和踩坑</li>
+        <li>独立开发：从想法到 App Store 上线</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="ticket">
+    <div class="slim">
+      <h2><span class="stub-code green">ADD</span>把这一联收入袋：加微信</h2>
+      <div class="qr-grid" style="padding:10px 0 0">
+        <figure style="margin:0">
+          <img src="assets/二维码.jpg" alt="Dan 的微信二维码" />
+          <figcaption>微信扫码直加</figcaption>
+        </figure>
+        <div>
+          <button class="btn copy" type="button" onclick="copyWeChat()"><span class="dot" aria-hidden="true"></span>复制微信号</button>
+          <div class="contact">
+            <button type="button" onclick="copyWeChat()"><strong>微信同手机号</strong><code>15910351781</code><span class="go">复制</span></button>
+            <a href="tel:15910351781"><strong>电话</strong><code>15910351781</code><span class="go">拨打</span></a>
+            <a href="mailto:duandw339@163.com"><strong>邮箱</strong><code>duandw339@163.com</code><span class="go">写信</span></a>
+            <a href="https://github.com/Jst-Well-Dan" target="_blank" rel="noopener"><strong>GitHub</strong><code>Jst-Well-Dan</code><span class="go">查看</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<dialog id="projDialog" class="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-head">
+    <span id="dlgCode" class="stub-code">STUB</span>
+    <h3 id="dlgTitle">项目</h3>
+    <button class="dlg-close" type="button" onclick="closeProj()" aria-label="关闭">✕</button>
+  </div>
+  <div class="dlg-body">
+    <p id="dlgDesc"></p>
+    <div id="dlgShots"></div>
+    <div id="dlgFacts"></div>
+    <div id="dlgCta" class="dlg-cta"></div>
+    <div id="dlgTags" class="dlg-tags"></div>
+  </div>
+</dialog>
+
+<aside class="bottom-bar">
+  <div class="bottom-inner">
+    <img src="assets/Well-Dan.jpg" alt="" />
+    <div><strong>Dan · Well Dan</strong><span>CFA ｜ AI 全栈 ｜ FDE 落地</span></div>
+    <button type="button" onclick="copyWeChat()"><span class="dot" aria-hidden="true"></span>加微信</button>
+  </div>
+</aside>
+
+<div id="toast" class="toast" role="status">微信号已复制（15910351781），期待会场交流！</div>
+
+<script>
+  var PROJECTS = {
+    b2b: {
+      code: 'STUB·B2B', codeClass: '',
+      title: '销售与合同 ERP 闭环系统',
+      desc: '传统制造业销售部的信息化改造：告别 Excel 管合同，选品、客户、合同、审批、申报在一套系统里闭环，10–20 人团队在用，需求到上线 3–4 个月。',
+      shots: [ ['assets/销售应用.png', '销售管理系统工作台：产品 8,197 条，客户 1,045 家'] ],
+      facts: [ ['产品库','8,197 条主数据','可直接用于合同选品'], ['客户库','1,045 家档案','联系人、税号与地址集中维护'], ['打通','钉钉审批 ＋ 原有 ERP','勾选即带入合同并提交销售订单'] ],
+      tags: ['FDE 全流程交付','钉钉微应用','财务 ERP 对接'],
+      cta: []
+    },
+    app: {
+      code: 'STUB·APP', codeClass: 'rose',
+      title: '今天岛上吃什么？',
+      desc: '治愈水彩风的美食决策应用：AI 拍照识菜与食材标签，Brunch、晚餐与加餐抽卡推荐，专为 iPad / iPhone 设计，已上架 App Store。',
+      shots: [ ['assets/早上吃什么实拍页.webp', '应用实拍：抽卡推荐页'] ],
+      facts: [],
+      tags: ['Swift 原生','AI 视觉识别','独立上架'],
+      cta: [ ['去 App Store 看看','https://apps.apple.com/cn/app/%E4%BB%8A%E5%A4%A9%E5%B2%9B%E4%B8%8A%E5%90%83%E4%BB%80%E4%B9%88/id6757694950','get'] ]
+    },
+    health: {
+      code: 'STUB·SIDE', codeClass: 'teal',
+      title: '全家健康档案',
+      desc: '本地优先、隐私安全的家庭健康档案：体检报告与就医记录 AI 结构化入库，多成员指标趋势追踪，数据只留本地。',
+      shots: [ ['assets/健康管理应用宣传页.png','宣传页：本地存储 · 隐私安全 · 全家共享'], ['assets/健康管理应用实拍页.png','实拍页：成员档案与高血压随访记录'] ],
+      facts: [],
+      tags: ['本地存储','多模态结构化'],
+      cta: []
+    },
+    rebuy: {
+      code: 'STUB·SIDE', codeClass: 'teal',
+      title: '复购不烦恼',
+      desc: '微信小程序：日常复购商品的价格记账本，基于历史价格分位（绿-琥珀-红）判断这单一键值不值得买，自建轻量后端。',
+      shots: [ ['assets/复购不烦恼.png','小程序实拍：候选比价面板'] ],
+      facts: [],
+      tags: ['微信小程序','自建后端','微信登录'],
+      cta: []
+    }
+  };
+
+  function openProj(key){
+    var p = PROJECTS[key];
+    if(!p) return;
+    var dlg = document.getElementById('projDialog');
+    var code = document.getElementById('dlgCode');
+    code.textContent = p.code;
+    code.className = 'stub-code' + (p.codeClass ? ' ' + p.codeClass : '');
+    document.getElementById('dlgTitle').textContent = p.title;
+    document.getElementById('dlgDesc').textContent = p.desc;
+    var shots = document.getElementById('dlgShots');
+    shots.innerHTML = '';
+    p.shots.forEach(function(s){
+      var fig = document.createElement('figure');
+      var img = document.createElement('img');
+      img.src = s[0]; img.alt = p.title + '截图'; img.loading = 'lazy';
+      var cap = document.createElement('figcaption');
+      cap.textContent = s[1] + ' · 点图片展开 / 收起';
+      fig.appendChild(img); fig.appendChild(cap);
+      fig.addEventListener('click', function(){ img.classList.toggle('full'); });
+      shots.appendChild(fig);
+    });
+    var facts = document.getElementById('dlgFacts');
+    facts.innerHTML = '';
+    if(p.facts.length){
+      var t = document.createElement('table');
+      t.className = 'dlg-facts';
+      p.facts.forEach(function(f){
+        var tr = document.createElement('tr');
+        var th = document.createElement('th'); th.textContent = f[0];
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(f[1]));
+        var sm = document.createElement('small'); sm.textContent = f[2];
+        td.appendChild(sm);
+        tr.appendChild(th); tr.appendChild(td);
+        t.appendChild(tr);
+      });
+      facts.appendChild(t);
+    }
+    var cta = document.getElementById('dlgCta');
+    cta.innerHTML = '';
+    p.cta.forEach(function(c){
+      var a = document.createElement('a');
+      a.className = 'btn get'; a.href = c[1]; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = c[0];
+      cta.appendChild(a);
+    });
+    var tags = document.getElementById('dlgTags');
+    tags.innerHTML = '';
+    p.tags.forEach(function(g){
+      var s = document.createElement('span'); s.textContent = g;
+      tags.appendChild(s);
+    });
+    if(typeof dlg.showModal === 'function'){ dlg.showModal(); }
+    else { window.open(p.shots[0][0], '_blank'); }
+  }
+  function closeProj(){
+    var dlg = document.getElementById('projDialog');
+    if(dlg.open) dlg.close();
+  }
+  (function(){
+    var dlg = document.getElementById('projDialog');
+    dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  })();
+
+  function copyWeChat(){
+    var id = '15910351781';
+    function done(){ showToast(); }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = id; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); done(); } catch(e){ done(); }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(id).then(done).catch(fallback); }
+    else { fallback(); }
+  }
+  function showToast(){
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+</script>
+</body>
+</html>
