@@ -20,7 +20,6 @@
     --teal: oklch(0.47 0.12 235);
     --teal-wash: oklch(0.94 0.035 235);
     --amber-wash: oklch(0.95 0.045 85);
-    --wechat: oklch(0.62 0.10 155);
     --field: oklch(0.97 0.008 343);
     --shadow: oklch(0.24 0.035 345 / 0.14);
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
@@ -77,7 +76,7 @@
   .stub-code{ font-family:var(--font-mono); font-size:11px; font-weight:700; color:oklch(1 0 0); background:var(--ink); border-radius:6px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
   .stub-code.rose{ background:var(--rose); }
   .stub-code.teal{ background:var(--teal); }
-  .stub-code.green{ background:var(--wechat); }
+  .stub-code.green{ background:var(--rose); }
   .stub-main{ flex:1; min-width:0; }
   .stub-main strong{ display:block; font-size:16px; }
   .stub-main span{ display:block; font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -89,7 +88,7 @@
     border:1.5px solid var(--ink);
   }
   .mini-get:active{ filter:brightness(1.6); }
-  .dot{ width:8px; height:8px; border-radius:50%; background:var(--wechat); flex-shrink:0; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--rose); flex-shrink:0; }
   .stub-hint{ display:flex; align-items:center; gap:6px; padding:0 16px 12px 16px; font-family:var(--font-mono); font-size:11.5px; color:var(--muted); }
 
   /* Duo */
@@ -116,7 +115,7 @@
   /* QR ticket */
   .qr-grid{ display:grid; grid-template-columns:128px 1fr; gap:14px; padding:12px 16px 14px; align-items:start; }
   .qr-grid figure{ border:1.5px solid var(--ink); border-radius:10px; overflow:hidden; }
-  .qr-grid figure img{ width:100%; height:128px; object-fit:cover; display:block; }
+  .qr-grid figure img{ width:100%; height:auto; object-fit:contain; display:block; background:oklch(1 0 0); }
   .qr-grid figcaption{ font-size:11px; color:var(--muted); text-align:center; padding:3px 0 5px; border-top:1px solid var(--line); }
   .btn{
     appearance:none; border-radius:999px; font-family:inherit; font-size:13.5px; font-weight:800;
@@ -178,7 +177,6 @@
     .duo{ grid-template-columns:1fr; }
     .duo > button:first-child{ border-right:none; border-bottom:2px dashed var(--dash); }
     .qr-grid{ grid-template-columns:1fr; }
-    .qr-grid figure img{ height:170px; }
     .badge-name h1{ font-size:38px; }
     .stub-main span{ white-space:normal; }
     dialog.dlg{ width:calc(100vw - 28px); border-radius:14px; }
