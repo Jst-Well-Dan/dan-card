@@ -273,7 +273,7 @@
 
   <article class="ticket">
     <div class="slim">
-      <h2><span class="stub-code green">ADD</span>把这一联收入袋：加微信</h2>
+      <h2><span class="stub-code green">ADD</span>联系方式</h2>
       <div class="qr-grid" style="padding:10px 0 0">
         <figure style="margin:0">
           <img src="assets/二维码.jpg" alt="Dan 的微信二维码" />
@@ -331,7 +331,7 @@
       code: 'STUB·APP', codeClass: 'rose',
       title: '今天岛上吃什么？',
       desc: '治愈水彩风的美食决策应用：AI 拍照识菜与食材标签，Brunch、晚餐与加餐抽卡推荐，专为 iPad / iPhone 设计，已上架 App Store。',
-      shots: [ ['assets/早上吃什么实拍页.webp', '应用实拍：抽卡推荐页'] ],
+      shots: [ ['assets/早上吃什么实拍页.webp', '应用实拍：抽卡推荐页', true] ],
       facts: [],
       tags: ['Swift 原生','AI 视觉识别','独立上架'],
       cta: [ ['去 App Store 看看','https://apps.apple.com/cn/app/%E4%BB%8A%E5%A4%A9%E5%B2%9B%E4%B8%8A%E5%90%83%E4%BB%80%E4%B9%88/id6757694950','get'] ]
@@ -372,9 +372,12 @@
       var img = document.createElement('img');
       img.src = s[0]; img.alt = p.title + '截图'; img.loading = 'lazy';
       var cap = document.createElement('figcaption');
-      cap.textContent = s[1] + ' · 点图片展开 / 收起';
+      if(s[2]){ img.classList.add('full'); cap.textContent = s[1]; }
+      else{
+        cap.textContent = s[1] + ' · 点图片展开 / 收起';
+        fig.addEventListener('click', function(){ img.classList.toggle('full'); });
+      }
       fig.appendChild(img); fig.appendChild(cap);
-      fig.addEventListener('click', function(){ img.classList.toggle('full'); });
       shots.appendChild(fig);
     });
     var facts = document.getElementById('dlgFacts');
