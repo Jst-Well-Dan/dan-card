@@ -32,7 +32,7 @@
     background: var(--page); color: var(--ink);
     font-family: var(--font-sans); font-size:15px; line-height:1.6;
     min-height:100vh; display:flex; flex-direction:column; align-items:center;
-    padding:0 0 40px 0;
+    padding:0 0 92px 0;
   }
   h1,h2,h3{ text-wrap: balance; letter-spacing:-0.01em; }
   p{ text-wrap: pretty; }
@@ -116,13 +116,10 @@
   .qr-grid{ display:grid; grid-template-columns:128px 1fr; gap:14px; padding:12px 16px 14px; align-items:start; }
   .qr-grid figure{ border:1.5px solid var(--ink); border-radius:10px; overflow:hidden; }
   .qr-grid figure img{ width:100%; height:auto; object-fit:contain; display:block; background:oklch(1 0 0); }
-  .qr-grid figcaption{ font-size:11px; color:var(--muted); text-align:center; padding:3px 0 5px; border-top:1px solid var(--line); }
   .btn{
     appearance:none; border-radius:999px; font-family:inherit; font-size:13.5px; font-weight:800;
     padding:9px 18px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; text-decoration:none;
   }
-  .btn.copy{ background:var(--ink); border:1.5px solid var(--ink); color:oklch(1 0 0); }
-  .btn.copy:active{ filter:brightness(1.6); }
   .btn.get{ background:var(--ink); border:1.5px solid var(--ink); color:oklch(1 0 0); }
   .btn.get:active{ filter:brightness(1.6); }
   .btn.ghost{ background:var(--ticket); border:1.5px solid var(--ink); color:var(--ink); }
@@ -164,8 +161,17 @@
   .dlg-tags span{ font-size:11.5px; font-weight:600; color:var(--muted); background:var(--field); border:1px solid var(--line); padding:2px 8px; border-radius:999px; }
   .dlg-cta{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
 
+  .bottom-bar{ position:fixed; left:0; right:0; bottom:0; z-index:var(--z-bar); background:oklch(1 0 0 / 0.96); border-top:1.5px solid var(--ink); }
+  .bottom-inner{ max-width:600px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:10px; }
+  .bottom-inner img{ width:34px; height:34px; border-radius:9px; object-fit:cover; border:1.5px solid var(--ink); }
+  .bottom-inner div{ flex:1; min-width:0; }
+  .bottom-inner strong{ font-size:13px; display:block; }
+  .bottom-inner span{ font-size:11.5px; color:var(--muted); display:block; }
+  .bottom-inner button{ background:var(--ink); color:oklch(1 0 0); border:1.5px solid var(--ink); border-radius:999px; font:inherit; font-size:13px; font-weight:800; padding:9px 16px; cursor:pointer; display:flex; align-items:center; gap:7px; }
+  .bottom-inner button:active{ filter:brightness(1.6); }
+
   .toast{
-    position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(12px); z-index:var(--z-toast);
+    position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(12px); z-index:var(--z-toast);
     background:var(--ink); color:oklch(1 0 0); font-size:13px; font-weight:600;
     padding:11px 18px; border-radius:999px; box-shadow:0 14px 26px -14px var(--shadow);
     opacity:0; pointer-events:none; max-width:92vw; text-align:center;
@@ -257,7 +263,7 @@
 
   <article class="ticket">
     <div class="slim">
-      <h2><span class="stub-code">TALK</span>见面可以聊</h2>
+      <h2><span class="stub-code">TALK</span>可以和我聊</h2>
       <ul>
         <li>企业 AI 落地：传统企业怎样轻量打通 ERP</li>
         <li>Agent 实战：金融与调研类工作流和踩坑</li>
@@ -272,10 +278,8 @@
       <div class="qr-grid" style="padding:10px 0 0">
         <figure style="margin:0">
           <img src="assets/二维码.jpg" alt="Dan 的微信二维码" />
-          <figcaption>微信扫码直加</figcaption>
         </figure>
         <div>
-          <button class="btn copy" type="button" onclick="copyWeChat()"><span class="dot" aria-hidden="true"></span>复制微信号</button>
           <div class="contact">
             <button type="button" onclick="copyWeChat()"><strong>微信同手机号</strong><code>15910351781</code><span class="go">复制</span></button>
             <a href="tel:15910351781"><strong>电话</strong><code>15910351781</code><span class="go">拨打</span></a>
@@ -303,6 +307,14 @@
     <div id="dlgTags" class="dlg-tags"></div>
   </div>
 </dialog>
+
+<aside class="bottom-bar">
+  <div class="bottom-inner">
+    <img src="assets/Well-Dan.jpg" alt="" />
+    <div><strong>Dan · Well Dan</strong><span>CFA ｜ AI 全栈 ｜ FDE 落地</span></div>
+    <button type="button" onclick="copyWeChat()"><span class="dot" aria-hidden="true"></span>加微信</button>
+  </div>
+</aside>
 
 <div id="toast" class="toast" role="status">微信号已复制（15910351781），期待会场交流！</div>
 
